@@ -22,7 +22,6 @@ namespace EmployeesManager.Controllers
         // GET: Employee
         public async Task<IActionResult> Index()
         {
-            // rendera ut lista med employees
             return View(await _context.Employee.ToListAsync());
         }
 
@@ -238,29 +237,8 @@ namespace EmployeesManager.Controllers
         {
             return _context.Employee.Any(e => e.Id == id);
         }
-
-        [HttpGet]
-        public IActionResult getman()
-        {
-            var list = _context.Employee.Where(x => x.IsManager)
-            .ToList()
-            .Select(x => new SelectListItem
-            {
-                Value = x.Id.ToString(),
-                Text = x.FirstName + " " + x.LastName
-            });
-
-
-
-            ViewData["Manager"] = list;
-            return new EmptyResult();
-        }
     }
 
-    public class NewCategoryViewModel
-    {
-        public string Value { get; set; }
-        public string Text { get; set; }
-    }
+
 
 }
