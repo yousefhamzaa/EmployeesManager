@@ -1,0 +1,90 @@
+@model EmployeesManager.Models.Employee
+
+@{
+}
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Create</title>
+</head>
+<body>
+    <h4>Employee</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="FirstName" class="control-label"></label>
+                    <input asp-for="FirstName" class="form-control" />
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="LastName" class="control-label"></label>
+                    <input asp-for="LastName" class="form-control" />
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Rank</label>
+                    <input asp-for="Salary" class="form-control" />
+                    <span asp-validation-for="Salary" class="text-danger"></span>
+                </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="IsCEO" onclick="checkCEO()" /> @Html.DisplayNameFor(model => model.IsCEO)
+                    </label>
+                </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="IsManager" onclick="checkManager()"/> @Html.DisplayNameFor(model => model.IsManager)
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    @Html.DropDownList("Manager", "Select Manager")
+                    <span asp-validation-for="ManagerId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
+
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
+
+<script>
+        var dropDown = document.getElementById("Manager");
+        var ceoBox = document.getElementById("IsCEO");
+       // var managerBox = document.getElementById("IsManager");
+
+
+        function checkCEO() {
+            if (ceoBox.checked == true) {
+                dropDown.disabled = true;
+            } else {
+                dropDown.disabled = false;
+            }
+        }
+
+      //  function checkManager() {
+        //    if (ceoBox.checked == true) {
+          //  } else {
+          //      dropDown.disabled = false;
+           // }
+       // }
+
+</script>
+</body>
+</html>
+
